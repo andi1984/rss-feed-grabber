@@ -1,0 +1,33 @@
+{
+  "name": "rss-feed-grabber",
+  "version": "1.0.0",
+  "description": "Node-based RSS feed grabber",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./index.js localhost 3000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andi1984/rss-feed-grabber.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andi1984/rss-feed-grabber/issues"
+  },
+  "homepage": "https://github.com/andi1984/rss-feed-grabber#readme",
+  "private": "true",
+  "dependencies": {
+    "@supabase/postgrest-js": "^0.25.0",
+    "@supabase/supabase-js": "^1.5.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "lodash": "^4.17.21",
+    "node-cron": "^2.0.3",
+    "rss-parser": "^3.12.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}

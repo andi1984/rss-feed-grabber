@@ -6,7 +6,7 @@ const app = express();
 const port = 8080;
 
 app.get("/api", (req, res) => {
-  res.send("Hello world");
+  res.send("Hello world!");
 });
 app.get("/api/cron", async (req, res) => {
   const data = await runCronJob();

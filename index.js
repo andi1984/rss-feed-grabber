@@ -69,5 +69,6 @@ const cronJob = async () => {
   console.log(`Inserted ${insertedItems.length} items to the DB.`);
 };
 
+console.log("Setup cronjob");
 // Run every 30 minutes
 cron.schedule("* * * * *", cronJob);

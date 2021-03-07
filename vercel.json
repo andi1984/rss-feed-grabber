@@ -1,1 +1,4 @@
-{ "builds": [{ "src": "*.js", "use": "@vercel/node" }] }
+{
+  "name": "inoreader-rss-feed",
+  "version": "2"
+}

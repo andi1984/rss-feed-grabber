@@ -10,13 +10,17 @@ const supabase = createClient(
   process.env.SUPABASE_API_PUBLIC
 );
 
-const getFeed = require("./helper/getFeed");
-const stripFeedItem = require("./helper/stripFeedItem");
+const getFeed = require("../helper/getFeed");
+const stripFeedItem = require("../helper/stripFeedItem");
 
 const app = express();
 const port = 3000;
 
 const tableName = process.env.SUPABASE_TABLE_NAME;
+
+app.get("/", (req, res) => {
+  res.send("Hello world");
+});
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

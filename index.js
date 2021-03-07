@@ -16,10 +16,7 @@ const stripFeedItem = require("./helper/stripFeedItem");
 const app = express();
 const port = 3000;
 
-app.get("/", (req, res) => {
-  getFeed();
-  res.send("Hello World!");
-});
+const tableName = process.env.SUPABASE_TABLE_NAME;
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
@@ -44,7 +41,11 @@ const cronJob = async () => {
   const {
     data: overlappingIdsDbResult,
     error: overlappingQueryError,
-  } = await supabase.from("news").select("id").in("id", allIds);
+  } = await supabase.from(tableName).select("id").in("id", allIds);
+
+  if (overlappingQueryError) {
+    throw new Error(overlappingQueryError.message);
+  }
 
   const overlappingIds = overlappingIdsDbResult.map((entry) => entry.id);
 
@@ -57,7 +58,16 @@ const cronJob = async () => {
   }
 
   // 3. INSERT new items into the DB
-  const { data, error } = await supabase.from("news").insert(newData);
+  const { data: insertedItems, error: insertionError } = await supabase
+    .from(tableName)
+    .insert(newData);
+
+  if (insertionError) {
+    throw new Error(insertionError.message);
+  }
+
+  console.log(`Inserted ${insertedItems.length} items to the DB.`);
 };
 
+// Run every 30 minutes
 cron.schedule("* * * * *", cronJob);

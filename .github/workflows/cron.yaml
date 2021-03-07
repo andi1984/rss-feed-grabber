@@ -1,7 +1,7 @@
-name: 15-minute-cron
+name: fetch-new-rss-favs
 on:
   schedule:
-    - cron: "* * * * *"
+    - cron: "*/2 * * * *"
 jobs:
   cron:
     runs-on: ubuntu-latest

@@ -18,6 +18,9 @@ app.get("/api", async (req, res) => {
     isNaN(limit) ? DEFAULT_LIMIT : limit,
     isNaN(page) ? DEFAULT_PAGE : page
   );
+
+  /* TODO: Find a more "restricted" way for CORS to work */
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.send(results);
 });
 app.get("/api/cron", async (req, res) => {

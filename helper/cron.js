@@ -21,6 +21,7 @@ const runCronJob = async () => {
     ..._.pick(item, ["title"]),
     url: item.link,
     id: item.guid,
+    date: new Date(item.pubDate).toISOString(),
   }));
 
   // 2. Filter out feed items hat are already in the DB

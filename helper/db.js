@@ -15,6 +15,7 @@ async function getItems(limit, offset = 0) {
   const request = await supabase
     .from(tableName)
     .select("*")
+    .order("date", { ascending: false })
     .range(offset, offset + (limit - 1));
 
   if (request.error) {

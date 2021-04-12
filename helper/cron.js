@@ -17,12 +17,15 @@ const runCronJob = async () => {
   const rssData = await getFeed();
 
   // 1b Strip out data we don't need
-  const strippedData = rssData.items.map(stripFeedItem).map((item) => ({
-    ..._.pick(item, ["title"]),
-    url: item.link,
-    id: item.guid,
-    date: new Date(item.pubDate).toISOString(),
-  }));
+  const strippedData = rssData.items
+    .filter((item) => item.categories.includes("andi1984-news"))
+    .map(stripFeedItem)
+    .map((item) => ({
+      ..._.pick(item, ["title"]),
+      url: item.link,
+      id: item.guid,
+      date: new Date(item.pubDate).toISOString(),
+    }));
 
   // 2. Filter out feed items hat are already in the DB
 

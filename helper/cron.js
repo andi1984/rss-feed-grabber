@@ -32,20 +32,20 @@ const runCronJob = async () => {
   // 2. Filter out feed items hat are already in the DB
 
   // Get overlapping IDs that are already in the DB
-  const allIds = strippedData.map((entry) => entry.id);
+  const allSources = strippedData.map((entry) => entry.source);
   const {
-    data: overlappingIdsDbResult,
+    data: overlappingSourcesDbResult,
     error: overlappingQueryError,
-  } = await supabase.from(tableName).select("id").in("id", allIds);
+  } = await supabase.from(tableName).select("source").in("source", allSources);
 
   if (overlappingQueryError) {
     throw new Error(overlappingQueryError.message);
   }
 
-  const overlappingIds = overlappingIdsDbResult.map((entry) => entry.id);
+  const overlappingSources = overlappingSourcesDbResult.map((entry) => entry.source);
 
   const newData = strippedData.filter((item) => {
-    return !overlappingIds.includes(item.id);
+    return !overlappingSources.includes(item.source);
   });
 
   if (newData.length === 0) {

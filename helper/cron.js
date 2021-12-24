@@ -1,5 +1,6 @@
 require("dotenv").config();
 const _ = require("lodash");
+const { v4: uuidv4 } = require('uuid');
 
 const createClient = require("@supabase/supabase-js").createClient;
 
@@ -21,6 +22,7 @@ const runCronJob = async () => {
     .filter((item) => item.categories.includes("andi1984-news"))
     .map(stripFeedItem)
     .map((item) => ({
+      id: uuidv4(),
       ..._.pick(item, ["title"]),
       url: item.link,
       source: item.guid,

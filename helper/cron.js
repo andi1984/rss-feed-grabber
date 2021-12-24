@@ -23,7 +23,7 @@ const runCronJob = async () => {
     .map((item) => ({
       ..._.pick(item, ["title"]),
       url: item.link,
-      id: item.guid,
+      source: item.guid,
       date: new Date(item.pubDate).toISOString(),
     }));
 
